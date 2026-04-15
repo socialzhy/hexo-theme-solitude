@@ -4,10 +4,25 @@
 
 //- 图标组件
 mixin icon(iconClass, title)
-  if title
-    i.solitude(class=iconClass, title=title)
-  else
-    i.solitude(class=iconClass)
+  - var isAli = iconClass && iconClass.trim().startsWith('ali ')
+  - var isTx = iconClass && iconClass.trim().startsWith('tx ')
+  - if (isAli || isTx)
+    - if (isAli)
+      - var iconName = iconClass.trim().substring(4)
+    - else
+      - var iconName = iconClass.trim().substring(3)
+    - var href = '#' + iconName
+    if title
+      svg.iconfont.solitude(title=title)
+        use(xlink:href=href)
+    else
+      svg.iconfont.solitude
+        use(xlink:href=href)
+  - else
+    if title
+      i.solitude(class=iconClass, title=title)
+    else
+      i.solitude(class=iconClass)
 
 //- 链接组件
 mixin link(url, text, options)
