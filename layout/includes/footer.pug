@@ -87,7 +87,8 @@ mixin footerGroups()
           .footer-links#friend-links-in-footer
 //- 版权信息组件
 mixin copyrightInfo()
-  - const startYear = moment(theme.aside.siteinfo.runtime).year()
+  - const runtimeData = theme.aside.siteinfo.runtimeenable?.runtime || theme.aside.siteinfo.runtime
+  - const startYear = runtimeData ? moment(runtimeData).year() : new Date().getFullYear()
   - const currentYear = new Date().getFullYear()
   - const yearRange = startYear === currentYear ? startYear : `${startYear} - ${currentYear}`
   
@@ -99,7 +100,7 @@ mixin beianInfo()
   .beian-group
     +conditionalWrapper(theme.footer.beian)
       - const beian = theme.footer.beian || []
-      each item in beian
+      each item, index in beian
         +link(item.url, '', {
           class: 'footer-bar-link',
           title: item.name
@@ -108,9 +109,11 @@ mixin beianInfo()
             if item.icon
               img.beian-icon(src=url_for(item.icon), alt=item.name)
           span.beian-name= item.name
+        if index < beian.length - 1
+          span.beian-separator |
     
-    +link(_p('hexo'), _p('framework_by') + 'Hexo', { class: 'footer-bar-link' })
-    +link(_p('repo'), _p('theme_by') + 'Solitude', { class: 'footer-bar-link' })
+    //- +link(_p('hexo'), _p('framework_by') + 'Hexo', { class: 'footer-bar-link' })
+    //- +link(_p('repo'), _p('theme_by') + 'Solitude', { class: 'footer-bar-link' })
 
 //- 页脚右侧链接组件
 mixin footerRightLinks()

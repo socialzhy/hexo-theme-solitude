@@ -63,13 +63,31 @@ hexo.extend.filter.register(
         toc: { post: true, page: false, vague: true },
         tags: { enable: true, limit: 20, highlight: false, list: [] },
         siteinfo: {
-          postcount: true,
-          wordcount: false,
-          pv: true,
-          uv: true,
-          updatetime: true,
-          runtimeenable: true,
-          runtime: "2023-04-20 00:00:00",
+          postcount: {
+            enable: true,
+            icon: "fas fa-file-alt",
+          },
+          wordcount: {
+            enable: false,
+            icon: "fas fa-font",
+          },
+          pv: {
+            enable: true,
+            icon: "fas fa-eye",
+          },
+          uv: {
+            enable: true,
+            icon: "fas fa-user",
+          },
+          updatetime: {
+            enable: true,
+            icon: "fas fa-calendar-check",
+          },
+          runtimeenable: {
+            enable: true,
+            icon: "fas fa-clock",
+            runtime: "2023-04-20 00:00:00",
+          },
         },
       },
       index_post_list: {
@@ -397,7 +415,41 @@ hexo.extend.filter.register(
       },
     };
 
-    hexo.theme.config = { ...defaultConfig, ...hexo.theme.config };
+    // 兼容旧配置格式
+    const mergeConfig = (config) => {
+      const merged = { ...defaultConfig, ...config };
+      
+      // 处理 siteinfo 配置的兼容性
+      if (merged.aside && merged.aside.siteinfo) {
+        const siteinfo = merged.aside.siteinfo;
+        const keys = ['postcount', 'wordcount', 'pv', 'uv', 'updatetime', 'runtimeenable'];
+        
+        keys.forEach(key => {
+          if (typeof siteinfo[key] === 'boolean') {
+            // 旧格式：直接是布尔值
+            const defaultVal = defaultConfig.aside.siteinfo[key];
+            siteinfo[key] = {
+              enable: siteinfo[key],
+              icon: defaultVal.icon,
+              ...(key === 'runtimeenable' && { runtime: defaultVal.runtime })
+            };
+          } else if (typeof siteinfo[key] === 'object' && siteinfo[key] !== null) {
+            // 新格式：对象，确保有 enable 属性
+            if (typeof siteinfo[key].enable === 'undefined') {
+              siteinfo[key].enable = true;
+            }
+            // 确保有默认图标
+            if (!siteinfo[key].icon) {
+              siteinfo[key].icon = defaultConfig.aside.siteinfo[key].icon;
+            }
+          }
+        });
+      }
+      
+      return merged;
+    };
+
+    hexo.theme.config = mergeConfig(hexo.theme.config);
   },
   1
 );

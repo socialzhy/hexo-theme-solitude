@@ -180,23 +180,35 @@ aside:
   siteinfo:
     # Number of articles
     # 文章数量
-    postcount: true
+    postcount:
+      enable: true
+      icon: fas fa-file-alt
     # Total number of words
     # 总字数
-    wordcount: false
+    wordcount:
+      enable: false
+      icon: fas fa-font
     # PV
-    pv: true
+    pv:
+      enable: true
+      icon: fas fa-eye
     # UV
-    uv: true
+    uv:
+      enable: true
+      icon: fas fa-user
     # Last update date
     # 最后更新日期
-    updatetime: true
+    updatetime:
+      enable: true
+      icon: fas fa-calendar-check
     # Website creation time
     # 网站创建时间
-    runtimeenable: true
-    # Format: yyyy-MM-dd hh-mm-ss
-    # 格式: yyyy-MM-dd hh-mm-ss
-    runtime: "2023-04-20 00:00:00"
+    runtimeenable:
+      enable: true
+      icon: fas fa-clock
+      # Format: yyyy-MM-dd hh-mm-ss
+      # 格式: yyyy-MM-dd hh-mm-ss
+      runtime: "2023-04-20 00:00:00"
   # --------------------------- end ---------------------------
 # --------------------------- end ---------------------------
 

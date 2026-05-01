@@ -202,10 +202,12 @@
           margin 0
       .beian-group
         display flex
-        gap 8px
-        flex-wrap wrap
+        gap 16px
+        flex-wrap nowrap
+        align-items center
         +maxWidth768()
           justify-content center
+          flex-wrap wrap
 
         a:hover
           background 0 0
@@ -222,9 +224,14 @@
           color var(--efu-secondtext)
           padding 0
           margin 0
-          display flex
+          display inline-flex
           align-items center
           gap 4px
+          white-space nowrap
+
+        .beian-separator
+          color rgba(148, 163, 184, 0.2)
+          margin 0 4px
         
 
     .footer-bar-link

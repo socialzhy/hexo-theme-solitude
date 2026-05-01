@@ -1,36 +1,60 @@
 .webinfo
-    if theme.aside.siteinfo.postcount
+    if theme.aside.siteinfo.postcount.enable
         .webinfo-item
-            .item-name= __('aside.postcount')
+            .item-name
+                if theme.aside.siteinfo.postcount.icon
+                    i.solitude(class=theme.aside.siteinfo.postcount.icon)
+                    = ' '
+                = __('aside.postcount')
             .item-count= site.posts.length
     if theme.busuanzi
-        if theme.aside.siteinfo.pv
+        if theme.aside.siteinfo.pv.enable
             .webinfo-item
-                .item-name= __('aside.pv')
+                .item-name
+                    if theme.aside.siteinfo.pv.icon
+                        i.solitude(class=theme.aside.siteinfo.pv.icon)
+                        = ' '
+                    = __('aside.pv')
                 if theme.busuanzi_use === 0
                     span#busuanzi_value_site_pv
                         i.solitude.fas.fa-spinner.fa-spin
                 else
                     span#busuanzi_site_pv
                         i.solitude.fas.fa-spinner.fa-spin
-        if theme.aside.siteinfo.uv
+        if theme.aside.siteinfo.uv.enable
             .webinfo-item
-                .item-name= __('aside.uv')
+                .item-name
+                    if theme.aside.siteinfo.uv.icon
+                        i.solitude(class=theme.aside.siteinfo.uv.icon)
+                        = ' '
+                    = __('aside.uv')
                 if theme.busuanzi_use === 0
                     span#busuanzi_value_site_uv
                         i.solitude.fas.fa-spinner.fa-spin
                 else
                     span#busuanzi_site_uv
                         i.solitude.fas.fa-spinner.fa-spin
-    if theme.aside.siteinfo.runtimeenable
+    if theme.aside.siteinfo.runtimeenable.enable
         .webinfo-item
-            .item-name= __('aside.runtime')
+            .item-name
+                if theme.aside.siteinfo.runtimeenable.icon
+                    i.solitude(class=theme.aside.siteinfo.runtimeenable.icon)
+                    = ' '
+                = __('aside.runtime')
             .item-count#runtimeshow
-    if theme.aside.siteinfo.updatetime
+    if theme.aside.siteinfo.updatetime.enable
         .webinfo-item
-            .item-name= __('aside.updatetime')
+            .item-name
+                if theme.aside.siteinfo.updatetime.icon
+                    i.solitude(class=theme.aside.siteinfo.updatetime.icon)
+                    = ' '
+                = __('aside.updatetime')
             time.item-count(datetime=new Date())
-    if theme.wordcount && theme.aside.siteinfo.wordcount
+    if theme.wordcount && theme.aside.siteinfo.wordcount.enable
         .webinfo-item
-            .item-name= __('aside.wordcount')
+            .item-name
+                if theme.aside.siteinfo.wordcount.icon
+                    i.solitude(class=theme.aside.siteinfo.wordcount.icon)
+                    = ' '
+                = __('aside.wordcount')
             .item-count= totalcount(site)
